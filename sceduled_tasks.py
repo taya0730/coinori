@@ -159,16 +159,24 @@ send_api(post_slack_msg_url, "POST", get_body('autotrade app start'))
 # predict_price("KRW-BTC")
 # 1시간에 한번씩 실행
 # schedule.every().hour.do(lambda: predict_price("KRW-BTC"))
+global predict_reponse = {}
+def get_predict_price(get_predict_price_url):
+    response = send_api(get_predict_price_url, "GET")
+    print("response: " + response)
+    predict_reponse = response
+
 # 30분에 한번씩 실행
 get_predict_price_url = "/upbit/predict-price/KRW/BTC/minute30/144"
-predict_reponse = {}
-schedule.every(30).minutes.do(predict_reponse = lambda: send_api(get_predict_price_url, "GET"))
+schedule.every(30).minutes.do(lambda: self.get_predict_price(get_predict_price_url))
 
 get_best_kvalue_url = "http://127.0.0.1:800/upbit/best-kvalue/KRW/BTC/7"
 kvalue = send_api(get_best_kvalue_url, "GET")
+print(kvalue)
 tmp_target_price = 0
-
-
+while True: 
+    print(predict_reponse)
+	# send_api(post_slack_msg_url, "POST", get_body('autotrade app start'))
+	time.sleep(60)
 # while True:
 # 	try:
 # 		now = datetime.datetime.now()
