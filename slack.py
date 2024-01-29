@@ -21,7 +21,6 @@ slack_fields = Slack.model('Slack Message', {  # Model 객체 생성
 # slack_fields_with_id = Slack.inherit('slack_fields With ID', slack_fields, {
 #     'todo_id': fields.Integer(description='a Todo ID')
 # })
-#test
 
 @Slack.route('/send-msg')
 # @Slack.doc(params={'channel_name': '코이노리-upbit'})
