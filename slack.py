@@ -14,7 +14,7 @@ Slack = Namespace(
 
 slack_fields = Slack.model('Slack Message', {  # Model 객체 생성
     # 'data': fields.String(description='a Todo', required=True, example="what to do")
-    'channel': fields.String(description='slack channel name', required=True, example="코이노리-upbit"),
+    'channel': fields.String(description='slack channel id', required=False, example="코이노리-upbit id"),
     'message': fields.String(description='slack message', required=True, example="input message")
 })
 
