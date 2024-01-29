@@ -12,19 +12,21 @@ Slack = Namespace(
     description="Slack을 사용하기 위해 사용하는 API.",
 )
 
-todo_fields = Slack.model('Todo', {  # Model 객체 생성
-    'data': fields.String(description='a Todo', required=True, example="what to do")
+slack_fields = Slack.model('Slack Message', {  # Model 객체 생성
+    # 'data': fields.String(description='a Todo', required=True, example="what to do")
+    'channel': fields.String(description='slack channel name', required=True, example="코이노리-upbit"),
+    'message': fields.String(description='slack message', required=True, example="input message")
 })
 
-todo_fields_with_id = Slack.inherit('Todo With ID', todo_fields, {
-    'todo_id': fields.Integer(description='a Todo ID')
-})
+# slack_fields_with_id = Slack.inherit('slack_fields With ID', slack_fields, {
+#     'todo_id': fields.Integer(description='a Todo ID')
+# })
 
 @Slack.route('/send-msg')
 # @Slack.doc(params={'channel_name': '코이노리-upbit'})
 class SendMsg(Resource):
-    @Slack.expect(todo_fields) # 주입
-    @Slack.response(201, 'Success', todo_fields_with_id)
+    @Slack.expect(slack_fields) # 주입
+    # @Slack.response(200, 'Success', slack_fields_with_id)
     @Slack.response(500, 'Failed')
     def post(self):
         channel_name = request.json.get('channel')
