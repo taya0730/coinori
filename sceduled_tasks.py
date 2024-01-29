@@ -152,7 +152,7 @@ day_max_price = 0
 upbit = pyupbit.Upbit(access, secret)
 post_slack_msg_url = "/slack/send-msg"
 send_api(post_slack_msg_url, "POST", get_body('autotrade app start'))
-send_api(post_slack_msg_url, "POST", get_body('autotrade app start'))
+# send_api(post_slack_msg_url, "POST", get_body('autotrade app start'))
 # 시작 메세지 슬랙 전송
 # post_message(myToken,slack_roomname, "autotrade start")
 
