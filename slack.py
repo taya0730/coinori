@@ -29,21 +29,30 @@ class SendMsg(Resource):
     # @Slack.response(200, 'Success', slack_fields_with_id)
     @Slack.response(500, 'Failed')
     def post(self):
-        channel_name = request.json.get('channel')
+        # channel_id가 비어있다면 config 값 사용
+        if(request.json.get('channel') != None):
+            channel_id = request.json.get('channel')
+        else:
+            channel_id = config.slack_channel_id
+
+        # param에서 메시지 가져오기
         msg = request.json.get('message')
+        # print("msg is : "+msg)
         token = config.slack_token
-        # channel_name = "코이노리-upbit"
-        response = self.post_message(token, channel_name, msg)
+        # 메시지 전송
+        response = self.post_message(token, channel_id, msg)
         if(response.status_code == 200) : 
             result = successText
+        else:
+            result = errorText
+
         return {
-            'channel_name': channel_name,
             'sendText': msg,
             'result': result
         }
 
-
     def post_message(self, token, channel, text):
+        '''slack 메시지 전송 함수'''
         response = requests.post("https://slack.com/api/chat.postMessage",
             headers={"Authorization": "Bearer "+token},
             data={"channel": channel,"text": text}
