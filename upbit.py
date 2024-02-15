@@ -83,19 +83,20 @@ class Balance(Resource):
     def get(self, ticker):
         msg = successText
         balance = 0
-        balances = {}
-        try:
-            """잔고 조회"""
-            balances = pyupbit.Upbit(config.upbit_access_key, config.upbit_secret_key).get_balances()
+        # balances = {}
+        # try:
+        #     """잔고 조회"""
+        #     balances = pyupbit.Upbit(config.upbit_access_key, config.upbit_secret_key).get_balances()
             
-            for b in balances:
-                if b['currency'] == ticker:
-                    if b['balance'] is not None:
-                        balance = float(b['balance'])
-                    else:
-                        balance = 0
-        except:
-            msg = balances['error']['message']
+        #     for b in balances:
+        #         if b['currency'] == ticker:
+        #             if b['balance'] is not None:
+        #                 balance = float(b['balance'])
+        #             else:
+        #                 balance = 0
+        # except:
+        #     msg = balances['error']['message']
+        balance, msg = get_balance(ticker)
 
         return {
             'ticker': ticker,
@@ -250,7 +251,36 @@ class PredictPrice(Resource):
             'predicted_close_price': predicted_close_price,
             'msg': msg
         }
+def get_balance(target: str):
+    """Get the balance of a specific currency.
 
+    Args:
+        target (str): The currency to check the balance of.
+
+    Returns:
+        Tuple[float, str]: A tuple containing the balance and an error message.
+
+    Raises:
+        ValueError: If the currency is not supported.
+
+    """
+    balance = 0
+    balances = {}
+    msg = successText
+    try:
+        """Get the current account balance."""
+        balances = pyupbit.Upbit(config.upbit_access_key, config.upbit_secret_key).get_balances()
+
+        for b in balances:
+            if b['currency'] == target:
+                if b['balance'] is not None:
+                    balance = float(b['balance'])
+                else:
+                    balance = 0
+    except Exception as e:
+        msg = f"Error getting balance: {e}"
+
+    return balance, msg
 
 predicted_close_price = 0
 def predict_price(ticker):
