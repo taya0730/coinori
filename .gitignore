@@ -67,7 +67,6 @@ Thumbs.db
 .ruff_cache/
 
 # Documentation
-docs/
 CURSOR_RULES.md
 ROADMAP.md
 AUTO_TRADING.md
@@ -79,4 +78,7 @@ coverage/
 htmlcov/
 .tox/
 .nox/
-.hypothesis/ 
+.hypothesis/
+
+# Remove docs from gitignore
+# docs/ 
