@@ -23,6 +23,8 @@ wheels/
 .pytest_cache/
 .coverage
 htmlcov/
+venv/
+.python-version
 
 # Node
 node_modules/
@@ -65,6 +67,16 @@ Thumbs.db
 .ruff_cache/
 
 # Documentation
+docs/
 CURSOR_RULES.md
 ROADMAP.md
-AUTO_TRADING.md 
+AUTO_TRADING.md
+
+# Testing
+coverage/
+.coverage
+.pytest_cache/
+htmlcov/
+.tox/
+.nox/
+.hypothesis/ 

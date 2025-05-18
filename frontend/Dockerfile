@@ -14,3 +14,9 @@ EXPOSE 3000
 
 # 개발 서버 실행
 CMD ["npm", "start"]
+
+RUN apt-get update && apt-get install -y git
+
+
+
+
