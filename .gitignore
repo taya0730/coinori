@@ -50,4 +50,21 @@ docker-compose.override.yml
 
 # Database
 *.sqlite3
-*.db 
+*.db
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS
+Thumbs.db
+
+# Project specific
+*.log
+.ruff_cache/
+
+# Documentation
+CURSOR_RULES.md
+ROADMAP.md
+AUTO_TRADING.md 

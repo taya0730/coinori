@@ -14,3 +14,7 @@ aiohttp==3.9.1
 pytest==7.4.3
 alembic==1.12.1
 psycopg2-binary==2.9.9
+
+# 업비트 API 연동
+pyupbit==0.2.33
+cryptography==41.0.5
